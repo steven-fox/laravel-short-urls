@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace StevenFox\Larashurl\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class ShortUrlCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-short-urls';
 
     public $description = 'My command';
 
