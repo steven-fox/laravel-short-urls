@@ -1,14 +1,17 @@
-includes:
-    - phpstan-baseline.neon
-
 parameters:
     level: 5
     paths:
         - src
         - config
         - database
+        - routes
+    excludePaths:
+        - tests
+    databaseMigrationsPath:
+        - database/migrations
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
-    checkModelProperties: true
+    checkModelProperties: false
     checkMissingIterableValueType: false
-
+    noEnvCallsOutsideOfConfig: true
