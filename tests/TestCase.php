@@ -4,7 +4,7 @@ namespace StevenFox\Larashurl\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use StevenFox\Larashurl\ShortUrlServiceProvider;
+use StevenFox\Larashurl\LarashurlServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,24 +13,19 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'StevenFox\\ShortUrl\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'StevenFox\\Larashurl\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            ShortUrlServiceProvider::class,
+            LarashurlServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function defineEnvironment($app): void
     {
-        config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-short-urls_table.php.stub';
-        $migration->up();
-        */
+        $app['config']->set('database.default', 'testing');
     }
 }

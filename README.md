@@ -6,20 +6,35 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/steven-fox/laravel-short-urls.svg?style=flat-square)](https://packagist.org/packages/steven-fox/laravel-short-urls)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+
+Features from other short url generators:
+- Pixel tracking
+- Public stats
+- Short url tagging
+- Short url descriptions
+- QR codes
+- Smart urls (redirect to multiple urls based on device, browser, location, etc)
+- Webhooks
+- 
+
 KEY FEATURES
 Larashurl
+- Short urls can either respond with a redirect response or a customizable view. The customizable view would allow one to embed GA/FB/etc tracker javascript into the page before performing a browser-based redirect.
 - Short urls have a configurable destination url.
+- ** Short urls can have a query/url param that would make it easy to track individual visitors that aren't necessarily auth users. So, say a newsletter link: it would be the same short url but could have some sort of url param that would allow one to record the subscriber that clicked it, which is different than a user_id/auth_id.
 - Short urls have a configurable url key.
 - Short urls can use a custom seed for the key generator.
 - Short urls can use a custom key generator (interface).
 - Short urls can use a custom user agent parser (interface).
 - Short urls have a configurable redirect status code.
 - Short urls can be associated with a model? Would this allow one to dynamically determine the destination url?
+- Short urls can be attached to multiple campaigns.
 - Short urls can have options:
   - Max number of uses (including single use).
   - Activation and deactivation datetime.
   - Tracking visits.
     - Recording user (when authenticated)
+    - Visitor type (human, bot, etc)
     - Ip address
     - OS
     - OS version
@@ -28,10 +43,10 @@ Larashurl
     - Referer url
     - Device type
     - Full user agent
-    - Bot??
-    - Forward query params
-    - Using https for the destination url
-    - All options have configurable default (globally) but can be overridden for each short url
+  - Forward query params
+    - And maybe an option to apply a certain set of query params?
+  - Using https for the destination url
+  - All options have configurable default (globally) but can be overridden for each short url
 - How to handle custom attributes on the ShortUrl model?
   - Mailcoach method where the model classes are dynamic and users can easily override them?
   - Short url package method with a beforeCreate() method that loops through callbacks?
