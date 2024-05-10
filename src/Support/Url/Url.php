@@ -3,7 +3,6 @@
 namespace StevenFox\Larashurl\Support\Url;
 
 use Psr\Http\Message\UriInterface;
-use StevenFox\Larashurl\Exceptions\LarashurlException;
 use Stringable;
 
 class Url implements Stringable, UriInterface
