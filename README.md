@@ -1,35 +1,27 @@
-# Short urls with dashboard for Laravel apps.
+# Larashurl
+Short urls for Laravel apps, dashboard included.
+
+# Work In Progress
+This package is not yet ready for production applications. There are a number of v1 features missing along with comprehensive tests. A v1.0.0 release will signal a production ready state.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/steven-fox/laravel-short-urls.svg?style=flat-square)](https://packagist.org/packages/steven-fox/laravel-short-urls)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/steven-fox/laravel-short-urls/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/steven-fox/laravel-short-urls/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/steven-fox/laravel-short-urls/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/steven-fox/laravel-short-urls/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/steven-fox/laravel-short-urls.svg?style=flat-square)](https://packagist.org/packages/steven-fox/laravel-short-urls)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-Features from other short url generators:
-- Pixel tracking
-- Public stats
-- Short url tagging
-- Short url descriptions
-- QR codes
-- Smart urls (redirect to multiple urls based on device, browser, location, etc)
-- Webhooks
-- 
+# Features
 
-KEY FEATURES
-Larashurl
-- Short urls can either respond with a redirect response or a customizable view. The customizable view would allow one to embed GA/FB/etc tracker javascript into the page before performing a browser-based redirect.
+- Short urls can either respond with a redirect response or a customizable view. The customizable view would allow one to perform browser-based actions before performing a client side redirect. Ex: embed GA/FB/etc tracker javascript into the page or show a custom message..
 - Short urls have a configurable destination url.
-- ** Short urls can have a query/url param that would make it easy to track individual visitors that aren't necessarily auth users. So, say a newsletter link: it would be the same short url but could have some sort of url param that would allow one to record the subscriber that clicked it, which is different than a user_id/auth_id.
 - Short urls have a configurable url key.
 - Short urls can use a custom seed for the key generator.
-- Short urls can use a custom key generator (interface).
-- Short urls can use a custom user agent parser (interface).
+- Short urls can use a custom key generator.
+- Short urls can use a custom user agent parser.
+- Short urls have an optional feature to attempt visitor identification (relating a short url visit back to a particular user of your system) based on multiple resolution options - authentication or custom query params.
 - Short urls have a configurable redirect status code.
-- Short urls can be associated with a model? Would this allow one to dynamically determine the destination url?
-- Short urls can be attached to multiple campaigns.
-- Short urls can have options:
+- Short urls can be attached to a campaign to group similar links together and control bulk settings.
+- Short urls can have various options on an individual link basis:
   - Max number of uses (including single use).
   - Activation and deactivation datetime.
   - Tracking visits.
@@ -42,22 +34,28 @@ Larashurl
     - Browser version
     - Referer url
     - Device type
-    - Full user agent
-  - Forward query params
-    - And maybe an option to apply a certain set of query params?
-  - Using https for the destination url
-  - All options have configurable default (globally) but can be overridden for each short url
-- How to handle custom attributes on the ShortUrl model?
-  - Mailcoach method where the model classes are dynamic and users can easily override them?
-  - Short url package method with a beforeCreate() method that loops through callbacks?
-- Use the Conditional trait on the PendingShortUrl class.
-- Custom prefix or fully-customized route (with ability to turn off default route)
-- Custom middleware for the route
-- Custom database connection
+    - Full user agent string
+  - Forwarding query params
+    - (Future feature) Ability to apply a certain set of query params to all redirections (like setting utm_campaign/utm_source/etc automatically).
+  - Forcing https for the destination url
+  - All options have a configurable default setting but can be overridden for each short url.
+- Short url routes can have a custom prefix or a fully-customized route (with ability to turn off default route).
+- Custom middleware for the route.
+- Custom database connections for each model.
 - Model factories
 - Visit analytics
   - Charts with customizable timespan
+- An admin UI to easily manage short urls, campaigns, and review visit analytics.
 - API to CRUD short urls and visits (so someone could deploy this as a solo app and interact with it from a separate service)
+
+### Future Features (v2):
+- Pixel tracking
+- Public stats
+- Short url tagging
+- Short url descriptions
+- QR codes
+- Smart urls (redirect to multiple urls based on device, browser, location, etc)
+- Webhooks
 
 ## Installation
 
@@ -80,13 +78,6 @@ You can publish the config file with:
 php artisan vendor:publish --tag="laravel-short-urls-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 Optionally, you can publish the views using
 
 ```bash
@@ -95,10 +86,7 @@ php artisan vendor:publish --tag="laravel-short-urls-views"
 
 ## Usage
 
-```php
-$shortUrl = new StevenFox\Larashurl();
-echo $shortUrl->echoPhrase('Hello, StevenFox!');
-```
+
 
 ## Testing
 
